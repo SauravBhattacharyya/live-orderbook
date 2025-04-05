@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { OrderbookProps } from "../types";
 import styles from "./styles.module.css";
 
@@ -42,4 +43,4 @@ const OrderBook = ({ orderbook, type }: OrderbookProps) => {
   );
 };
 
-export default OrderBook;
+export default memo(OrderBook);

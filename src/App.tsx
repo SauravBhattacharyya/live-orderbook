@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import OrderBook from "./components/orderBook";
 import useAppContext from "./context/useAppContext";
 import { calculateCumulative } from "./utils/commonFunctions";
@@ -5,8 +6,14 @@ import { calculateCumulative } from "./utils/commonFunctions";
 const Home = () => {
   const { orderBookData } = useAppContext();
 
-  const asks = calculateCumulative(orderBookData.asks);
-  const bids = calculateCumulative(orderBookData.bids);
+  const asks = useMemo(
+    () => calculateCumulative(orderBookData.asks),
+    [orderBookData.asks]
+  );
+  const bids = useMemo(
+    () => calculateCumulative(orderBookData.bids),
+    [orderBookData.bids]
+  );
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white p-4">
