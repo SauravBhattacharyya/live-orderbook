@@ -6,6 +6,7 @@ import { calculateCumulative } from "./utils/commonFunctions";
 const Home = () => {
   const { orderBookData } = useAppContext();
 
+  //cumulative calculation will run only when bids/asks data changes
   const asks = useMemo(
     () => calculateCumulative(orderBookData.asks),
     [orderBookData.asks]

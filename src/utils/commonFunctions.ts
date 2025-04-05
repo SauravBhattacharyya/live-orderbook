@@ -2,6 +2,7 @@ import { Dispatch, RefObject } from "react";
 import { OrderBookData, SortType } from "../types";
 import { initialState, MAX_LEVELS } from "./constants";
 
+//updates orderbook data, handles sequence validation, data merging, and state update
 export const updateData = (
   data: {
     bids: [number, number][];
@@ -40,6 +41,7 @@ export const updateData = (
   sequenceRef.current = data.sequence;
 };
 
+//merges new data with existing orderbook data
 export const updateOrderMap = (
   targetRef: Map<number, number>,
   updates: [number, number][]
@@ -53,6 +55,7 @@ export const updateOrderMap = (
   });
 };
 
+//sorts orderbook data based on price
 export const sortOrderBookData = (
   targetRef: Map<number, number>,
   sortType: SortType
@@ -62,6 +65,7 @@ export const sortOrderBookData = (
   );
 };
 
+//depth calculation for price level
 export const calculateCumulative = (orders: [number, number][]) => {
   let total = 0;
   return orders.map(([price, amount]) => {

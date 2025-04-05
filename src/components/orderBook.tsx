@@ -2,6 +2,7 @@ import { memo } from "react";
 import { OrderbookProps } from "../types";
 import styles from "./styles.module.css";
 
+//This component renders a list of bids or asks in the orderbook based on props type received
 const OrderBook = ({ orderbook, type }: OrderbookProps) => {
   return (
     <div className="border border-gray-700 rounded-sm bg-gray-900 p-3">
