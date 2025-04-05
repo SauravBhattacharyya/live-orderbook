@@ -34,8 +34,8 @@ export const updateData = (
   updateOrderMap(asksData, data.asks);
 
   setOrderBookData({
-    bids: sortOrderBookData(bidsData, "desc"),
-    asks: sortOrderBookData(asksData, "asc"),
+    bids: sortOrderBookData(bidsData, "desc").slice(0, 100),
+    asks: sortOrderBookData(asksData, "asc").slice(0, 100),
   });
   sequenceRef.current = data.sequence;
 };
@@ -65,7 +65,7 @@ export const sortOrderBookData = (
 export const calculateCumulative = (orders: [number, number][]) => {
   let total = 0;
   return orders.map(([price, amount]) => {
-    total += amount;
+    total += Number(amount);
     return { price, amount, total };
   });
 };
