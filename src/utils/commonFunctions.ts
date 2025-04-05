@@ -1,6 +1,6 @@
 import { Dispatch, RefObject } from "react";
 import { OrderBookData, SortType } from "../types";
-import { initialState } from "./constants";
+import { initialState, MAX_LEVELS } from "./constants";
 
 export const updateData = (
   data: {
@@ -34,8 +34,8 @@ export const updateData = (
   updateOrderMap(asksData, data.asks);
 
   setOrderBookData({
-    bids: sortOrderBookData(bidsData, "desc").slice(0, 100),
-    asks: sortOrderBookData(asksData, "asc").slice(0, 100),
+    bids: sortOrderBookData(bidsData, "desc").slice(0, MAX_LEVELS),
+    asks: sortOrderBookData(asksData, "asc").slice(0, MAX_LEVELS),
   });
   sequenceRef.current = data.sequence;
 };
