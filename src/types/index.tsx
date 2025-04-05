@@ -7,3 +7,12 @@ export type OrderBookData = {
 export interface AppContextType {
   orderBookData: OrderBookData;
 }
+
+export interface OrderbookProps {
+  orderbook: {
+    price: number;
+    amount: number;
+    total: number;
+  }[];
+  type: "asks" | "bids";
+}
