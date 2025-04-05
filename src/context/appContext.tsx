@@ -16,6 +16,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
   const bidsRef = useRef<Map<number, number>>(new Map());
   const asksRef = useRef<Map<number, number>>(new Map());
+  const sequenceRef = useRef<number>(0);
 
   useEffect(() => {
     const centrifuge = new Centrifuge(BASEURL, {
@@ -37,9 +38,24 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   const updateData = (data: {
     bids: [number, number][];
     asks: [number, number][];
+    sequence: number;
   }) => {
     const bidsData = bidsRef.current;
     const asksData = asksRef.current;
+    let isSequenceValid = true;
+    if (sequenceRef.current === 0) {
+      sequenceRef.current = data.sequence;
+    } else {
+      isSequenceValid = data.sequence === sequenceRef.current + 1;
+    }
+
+    if (!isSequenceValid) {
+      console.log("Sequence mismatch");
+      bidsData.clear();
+      asksData.clear();
+      setOrderBookData(initialState);
+      sequenceRef.current = 0;
+    }
 
     updateOrderMap(bidsData, data.bids);
     updateOrderMap(asksData, data.asks);
@@ -48,6 +64,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       bids: sortOrderBookData(bidsData, "desc"),
       asks: sortOrderBookData(asksData, "asc"),
     });
+    sequenceRef.current = data.sequence;
   };
 
   const updateOrderMap = (
