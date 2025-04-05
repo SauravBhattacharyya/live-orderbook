@@ -1,4 +1,5 @@
 import { OrderbookProps } from "../types";
+import styles from "./styles.module.css";
 
 const OrderBook = ({ orderbook, type }: OrderbookProps) => {
   return (
@@ -11,16 +12,16 @@ const OrderBook = ({ orderbook, type }: OrderbookProps) => {
         {type}
       </h4>
 
-      <div className="flex justify-between text-xs text-gray-500 pb-1 border-b border-gray-700">
+      <div className="flex justify-between text-xs text-gray-500 pb-1 border-b border-gray-700 px-4">
         <span>Price</span>
         <span>Amount</span>
       </div>
 
-      <ul className="space-y-1 relative">
+      <ul className={`space-y-1 relative ${styles.orderbookWrapper}`}>
         {orderbook.map(({ price, amount, total }, i) => (
           <li
             key={`${type}-${i}`}
-            className="relative text-sm flex justify-between border-b border-gray-800 hover:bg-gray-800 transition"
+            className="relative text-sm flex justify-between border-b border-gray-800 hover:bg-gray-800 transition px-2"
           >
             <div
               className={`absolute left-0 top-0 h-full ${
