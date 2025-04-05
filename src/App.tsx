@@ -1,13 +1,6 @@
 import OrderBook from "./components/orderBook";
 import useAppContext from "./context/useAppContext";
-
-const calculateCumulative = (orders: [number, number][]) => {
-  let total = 0;
-  return orders.map(([price, amount]) => {
-    total += amount;
-    return { price, amount, total };
-  });
-};
+import { calculateCumulative } from "./utils/commonFunctions";
 
 const Home = () => {
   const { orderBookData } = useAppContext();
