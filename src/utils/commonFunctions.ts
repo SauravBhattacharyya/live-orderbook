@@ -53,7 +53,7 @@ export const sortOrderBookData = (
 };
 
 //depth calculation for price level
-export const calculateCumulative = (orders: [number, number][]) => {
+export const calculateCumulative = (orders: [string, string][]) => {
   let total = 0;
   return orders.map(([price, amount]) => {
     total += Number(amount);

@@ -11,8 +11,8 @@ export interface AppContextType {
 
 export interface OrderbookProps {
   orderbook: {
-    price: number;
-    amount: number;
+    price: string;
+    amount: string;
     total: number;
   }[];
   type: "asks" | "bids";
