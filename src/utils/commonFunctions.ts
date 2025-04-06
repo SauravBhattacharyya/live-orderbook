@@ -1,4 +1,3 @@
-import { Dispatch, RefObject } from "react";
 import { OrderBookData, SortType } from "../types";
 import { initialState, MAX_LEVELS } from "./constants";
 
@@ -10,32 +9,7 @@ export const updateData = (
     asks: [number, number][];
     sequence: number;
   }
-  // bidsRef: RefObject<Map<number, number>>,
-  // asksRef: RefObject<Map<number, number>>,
-  // sequenceRef: RefObject<number>,
-  // setOrderBookData: Dispatch<React.SetStateAction<OrderBookData>>
 ) => {
-  // const bidsData = bidsRef.current;
-  // const asksData = asksRef.current;
-  // let isSequenceValid = true;
-  // if (sequenceRef.current === 0) {
-  //   sequenceRef.current = data.sequence;
-  // } else {
-  //   isSequenceValid = data.sequence === sequenceRef.current + 1;
-  // }
-  const initialSequence = prev.sequence === 0;
-  const isSequenceValid =
-    initialSequence || data.sequence === prev.sequence + 1;
-
-  if (!isSequenceValid) {
-    console.log("Sequence mismatch");
-    // bidsData.clear();
-    // asksData.clear();
-    // setOrderBookData(initialState);
-    // sequenceRef.current = 0;
-    return initialState;
-  }
-
   const newBids = new Map(prev.bids);
   const newAsks = new Map(prev.asks);
 
