@@ -1,7 +1,7 @@
 export type SortType = "asc" | "desc";
 export type OrderBookData = {
-  bids: [number, number][];
-  asks: [number, number][];
+  bids: [string, string][];
+  asks: [string, string][];
   sequence: number;
 };
 

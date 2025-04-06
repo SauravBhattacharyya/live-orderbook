@@ -37,9 +37,9 @@ const OrderBook = ({ orderbook, type }: OrderbookProps) => {
                   }%`,
                 }}
               />
-              <span className="z-10">{price}</span>
-              <span className="z-10">{amount}</span>
-              <span className="z-10">{total.toFixed(2)}</span>
+              <span className="z-10">{Number(price).toFixed(2)}</span>
+              <span className="z-10">{Number(amount).toFixed(2)}</span>
+              <span className="z-10">{Number(total).toFixed(2)}</span>
             </li>
           ))
         ) : (

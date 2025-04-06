@@ -5,8 +5,8 @@ import { MAX_LEVELS } from "./constants";
 export const updateData = (
   prev: OrderBookData,
   data: {
-    bids: [number, number][];
-    asks: [number, number][];
+    bids: [string, string][];
+    asks: [string, string][];
     sequence: number;
   }
 ) => {
@@ -25,15 +25,16 @@ export const updateData = (
 
 //merges new data with existing orderbook data
 export const updateOrderMap = (
-  prev: Map<number, number>,
-  updates: [number, number][]
+  prev: Map<string, string>,
+  updates: [string, string][]
 ) => {
   const map = new Map(prev);
   updates.forEach(([price, amount]) => {
-    if (amount === 0) {
-      map.delete(price);
+    const decimalFixedPrice = parseFloat(price).toFixed(8);
+    if (amount === "0") {
+      map.delete(decimalFixedPrice);
     } else {
-      map.set(price, amount);
+      map.set(decimalFixedPrice, amount);
     }
   });
   return map;
@@ -41,11 +42,13 @@ export const updateOrderMap = (
 
 //sorts orderbook data based on price
 export const sortOrderBookData = (
-  data: Map<number, number>,
+  data: Map<string, string>,
   sortType: SortType
 ) => {
   return [...data].sort((a, b) =>
-    sortType === "desc" ? b[0] - a[0] : a[0] - b[0]
+    sortType === "desc"
+      ? Number(b[0]) - Number(a[0])
+      : Number(a[0]) - Number(b[0])
   );
 };
 
