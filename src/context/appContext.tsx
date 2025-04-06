@@ -12,45 +12,6 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   const [orderBookData, setOrderBookData] =
     useState<OrderBookData>(initialState);
 
-  // useEffect(() => {
-  //   //initialize Centrifuge websocket connection
-  //   const centrifuge = new Centrifuge(BASEURL, {
-  //     token: import.meta.env.VITE_TOKEN,
-  //   });
-  //   const channel = `orderbook:BTC-USD`;
-  //   //subscribe to channel
-  //   const sub = centrifuge.newSubscription(channel);
-  //   //on receiving new update, process the data to store orderbook and refs
-  //   sub.on("publication", async (ctx) => {
-  //     if (!ctx.data) return;
-  //     const initialSequence = orderBookData.sequence === 0;
-  //     const isSequenceValid =
-  //       initialSequence || ctx.data.sequence === orderBookData.sequence + 1;
-  //     if (!isSequenceValid) {
-  //       // console.log("Sequence mismatch - fetching data from history");
-  //       try {
-  //         const history = await sub.history({ limit: MAX_LEVELS });
-  //         history.publications.forEach((pub) => {
-  //           setOrderBookData((prev) => updateData(prev, pub.data));
-  //         });
-  //       } catch (error) {
-  //         console.error("Failed to fetch history", error);
-  //         setOrderBookData(initialState);
-  //       }
-  //       return;
-  //     }
-  //     setOrderBookData((prev) => updateData(prev, ctx.data));
-  //   });
-  //   //start the subscription and connect to websocket
-  //   sub.subscribe();
-  //   centrifuge.connect();
-  //   //cleanup function
-  //   return () => {
-  //     sub.unsubscribe();
-  //     centrifuge.disconnect();
-  //   };
-  // }, []);
-
   useEffect(() => {
     const centrifuge = new Centrifuge(BASEURL, {
       token: import.meta.env.VITE_TOKEN,
