@@ -1,5 +1,5 @@
 import { OrderBookData, SortType } from "../types";
-import { initialState, MAX_LEVELS } from "./constants";
+import { MAX_LEVELS } from "./constants";
 
 //updates orderbook data, handles sequence validation, data merging, and state update
 export const updateData = (

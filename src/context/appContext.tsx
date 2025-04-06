@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useEffect, useRef, useState } from "react";
+import { createContext, ReactNode, useEffect, useState } from "react";
 import { AppContextType, OrderBookData } from "../types";
 import { Centrifuge } from "centrifuge";
 import { BASEURL, initialState, MAX_LEVELS } from "../utils/constants";
