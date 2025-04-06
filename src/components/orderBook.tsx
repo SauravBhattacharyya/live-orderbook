@@ -17,6 +17,7 @@ const OrderBook = ({ orderbook, type }: OrderbookProps) => {
       <div className="flex justify-between text-xs text-gray-500 pb-1 border-b border-gray-700 px-4">
         <span>Price</span>
         <span>Amount</span>
+        <span>Total</span>
       </div>
 
       <ul className={`space-y-1 relative ${styles.orderbookWrapper}`}>
@@ -38,6 +39,7 @@ const OrderBook = ({ orderbook, type }: OrderbookProps) => {
               />
               <span className="z-10">{price}</span>
               <span className="z-10">{amount}</span>
+              <span className="z-10">{total.toFixed(2)}</span>
             </li>
           ))
         ) : (
