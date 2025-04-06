@@ -39,12 +39,11 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         const initialSequence = prev.sequence === 0;
         const isSequenceValid =
           initialSequence || ctx.data.sequence === prev.sequence + 1;
-        console.log("ctx.data.sequence", ctx.data.sequence);
-        console.log("prev.sequence", prev.sequence);
+
         if (!isSequenceValid) {
-          // console.log("Sequence mismatch - fetching history");
-          fetchHistory(); // safe async call
-          return prev; // do not reset here
+          console.log("Sequence mismatch - fetching history");
+          fetchHistory();
+          return prev;
         }
 
         return updateData(prev, ctx.data);

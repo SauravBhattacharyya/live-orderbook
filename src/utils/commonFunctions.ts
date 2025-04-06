@@ -13,36 +13,38 @@ export const updateData = (
   const newBids = new Map(prev.bids);
   const newAsks = new Map(prev.asks);
 
-  updateOrderMap(newBids, data.bids);
-  updateOrderMap(newAsks, data.asks);
+  const updatedBids = updateOrderMap(newBids, data.bids);
+  const updatedAsks = updateOrderMap(newAsks, data.asks);
 
   return {
-    bids: sortOrderBookData(newBids, "desc").slice(0, MAX_LEVELS),
-    asks: sortOrderBookData(newAsks, "asc").slice(0, MAX_LEVELS),
+    bids: sortOrderBookData(updatedBids, "desc").slice(0, MAX_LEVELS),
+    asks: sortOrderBookData(updatedAsks, "asc").slice(0, MAX_LEVELS),
     sequence: data.sequence,
   };
 };
 
 //merges new data with existing orderbook data
 export const updateOrderMap = (
-  targetRef: Map<number, number>,
+  prev: Map<number, number>,
   updates: [number, number][]
 ) => {
+  const map = new Map(prev);
   updates.forEach(([price, amount]) => {
     if (amount === 0) {
-      targetRef.delete(price);
+      map.delete(price);
     } else {
-      targetRef.set(price, amount);
+      map.set(price, amount);
     }
   });
+  return map;
 };
 
 //sorts orderbook data based on price
 export const sortOrderBookData = (
-  targetRef: Map<number, number>,
+  data: Map<number, number>,
   sortType: SortType
 ) => {
-  return Array.from(targetRef.entries()).sort((a, b) =>
+  return [...data].sort((a, b) =>
     sortType === "desc" ? b[0] - a[0] : a[0] - b[0]
   );
 };
